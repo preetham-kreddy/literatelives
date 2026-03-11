@@ -458,15 +458,19 @@ nav.on-dark .nav-cta{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0
 .badge-up{display:inline-block;padding:3px 10px;background:rgba(34,48,74,0.08);color:var(--navy-soft);font-weight:300;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;}
 .badge-past{display:inline-block;padding:3px 10px;background:rgba(0,0,0,0.04);color:var(--ink-muted);font-weight:300;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;}
 
-.involve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(139,111,71,0.12);border:1px solid rgba(139,111,71,0.12);margin-bottom:70px;}
-.involve-card{background:var(--white);}
+.involve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(139,111,71,0.12);border:1px solid rgba(139,111,71,0.12);margin-bottom:24px;}
+.involve-card{background:var(--white);display:flex;flex-direction:column;}
 .involve-head{padding:36px 30px 28px;background:var(--navy);color:var(--white);}
 .involve-head h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.6rem;margin-bottom:10px;}
 .involve-head p{font-weight:300;font-size:0.83rem;color:rgba(253,250,245,0.55);line-height:1.8;}
-.involve-body{padding:28px 30px;}
+.involve-body{padding:28px 30px;flex:1;display:flex;flex-direction:column;justify-content:space-between;}
 .involve-body ul{list-style:none;margin-bottom:24px;}
 .involve-body ul li{font-weight:300;font-size:0.85rem;color:var(--ink-muted);padding:7px 0;border-bottom:1px solid rgba(139,111,71,0.08);display:flex;align-items:center;gap:10px;}
 .involve-body ul li::before{content:'—';color:var(--sepia-light);}
+/* ── Payment panel ── */
+.payment-panel{background:var(--white);border:1px solid rgba(139,111,71,0.12);border-bottom:none;padding:36px 40px;display:grid;grid-template-columns:1fr auto auto;gap:40px;align-items:center;}
+.payment-panel-pay{text-align:center;min-width:180px;}
+.payment-panel-qr{text-align:center;border-left:1px solid rgba(139,111,71,0.15);padding-left:40px;min-width:160px;}
 
 /* ── Donate box ── */
 .donate-box{background:var(--parchment-deep);padding:60px;text-align:center;border:1px solid rgba(139,111,71,0.12);}
@@ -644,6 +648,7 @@ $('nav-site-name').textContent = D.site.name;
 const navItems = [
   {id:'home',label:'Home'},{id:'about',label:'About'},
   {id:'work',label:'Our Work'},{id:'gallery',label:'Gallery'},
+  {id:'blog',label:'Blog'},{id:'events',label:'Events'},
   {id:'contact',label:'Contact'},{id:'involve',label:'Donate',cta:true}
 ];
 $('navLinks').innerHTML = navItems.map(n =>
@@ -940,41 +945,40 @@ const qrSrc = driveImg(D.site.upiQR);
 $('page-involve').innerHTML = `
   ${makePageHeader('Make a Difference', `Get <em style="font-style:italic;color:var(--sepia-light);">Involved</em>`, 'There are many ways to support Literate Lives — pick what works for you.')}
   <section class="section">
-    <div class="involve-grid reveal" id="involve-grid-wrap">
-      ${D.involve.tracks.map(t => {
-        if (t.action === 'donate') {
-          return `
-          <div class="involve-card" id="donate-anchor">
-            <div class="involve-head"><h3>${t.title}</h3><p>${t.description}</p></div>
-            <div class="involve-body">
-              <ul>${t.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-              <div class="amt-pills" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:16px;">
-                ${D.involve.donateAmounts.map((a,i)=>`<div class="amt-pill${i===1?' active':''}" onclick="pickAmt(this)" style="font-size:0.78rem;padding:8px 14px;">${a}</div>`).join('')}
-              </div>
-              <button class="btn-rose" style="width:100%;margin-bottom:10px;" onclick="launchRazorpay()">Pay via Razorpay →</button>
-              <p style="font-size:0.7rem;font-weight:300;color:var(--ink-muted);text-align:center;margin-bottom:14px;">Card · UPI · Net Banking · Wallets</p>
-              <div style="border-top:1px solid rgba(139,111,71,0.12);padding-top:14px;text-align:center;">
-                <div class="qr-img-wrap" style="width:110px;height:110px;margin:0 auto 8px;">
-                  ${qrSrc
-                    ? `<img src="${qrSrc}" alt="UPI QR" onerror="this.parentElement.innerHTML='<div class=\\'qr-placeholder\\'>QR unavailable</div>'">`
-                    : `<div class="qr-placeholder" style="font-size:0.65rem;">Add QR via<br>"upiQR" in JSON</div>`}
-                </div>
-                <p style="font-size:0.72rem;font-weight:300;color:var(--ink-muted);">UPI: <strong style="font-size:0.68rem;word-break:break-all;">${D.site.upiId}</strong></p>
-              </div>
-              <p style="font-size:0.68rem;font-weight:300;color:var(--ink-muted);text-align:center;margin-top:12px;letter-spacing:0.04em;">${D.site.TrustReg} · 80G available</p>
-            </div>
-          </div>`;
-        }
-        return `
+
+    <div class="payment-panel reveal">
+      <div>
+        <div class="eyebrow">Donate Now</div>
+        <div class="amt-pills" style="justify-content:flex-start;margin-bottom:0;">
+          ${D.involve.donateAmounts.map((a,i)=>`<div class="amt-pill${i===1?' active':''}" onclick="pickAmt(this)">${a}</div>`).join('')}
+        </div>
+      </div>
+      <div class="payment-panel-pay">
+        <button class="btn-rose" style="width:100%;margin-bottom:8px;" onclick="launchRazorpay()">Pay via Razorpay →</button>
+        <p style="font-size:0.7rem;font-weight:300;color:var(--ink-muted);">Card · UPI · Net Banking · Wallets</p>
+      </div>
+      <div class="payment-panel-qr">
+        <div class="qr-img-wrap" style="width:100px;height:100px;margin:0 auto 8px;">
+          ${qrSrc
+            ? `<img src="${qrSrc}" alt="UPI QR" onerror="this.parentElement.innerHTML='<div class=\\'qr-placeholder\\'>QR unavailable</div>'">`
+            : `<div class="qr-placeholder" style="font-size:0.62rem;">Add QR via<br>"upiQR" in JSON</div>`}
+        </div>
+        <p style="font-size:0.68rem;font-weight:300;color:var(--ink-muted);">UPI: <strong style="word-break:break-all;font-size:0.62rem;">${D.site.upiId}</strong></p>
+      </div>
+    </div>
+
+    <div class="involve-grid reveal">
+      ${D.involve.tracks.map(t=>`
         <div class="involve-card">
           <div class="involve-head"><h3>${t.title}</h3><p>${t.description}</p></div>
           <div class="involve-body">
             <ul>${t.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-            <button class="btn-sepia" style="width:100%;" onclick="showPage('contact')">${t.cta}</button>
+            <button class="btn-sepia" style="width:100%;" onclick="${t.action==='donate'?`window.scrollTo({top:0,behavior:'smooth'})`:`showPage('contact')`}">${t.cta}</button>
           </div>
-        </div>`;
-      }).join('')}
+        </div>`).join('')}
     </div>
+    <p style="font-size:0.75rem;font-weight:300;color:var(--ink-muted);text-align:center;margin-top:-40px;">${D.site.TrustReg} · 80G tax exemption available · All donations acknowledged</p>
+
   </section>
   ${makeFooter()}`;
 
