@@ -5,16 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Literate Lives Foundation</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- Razorpay SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <!-- ============================================================
   ✏️  EDIT YOUR SITE CONTENT HERE — NO CODE KNOWLEDGE NEEDED
   ============================================================
-  This block contains ALL the text, numbers, and links on the site.
-  Change anything between the quotes and your site updates instantly.
-  Rules:
-    • Keep text inside the quote marks " "
-    • Don't delete any commas or brackets
-    • To add items to a list, copy an existing item and paste below it
+  HOW TO ADD GOOGLE DRIVE IMAGES:
+    1. Upload photo to Google Drive
+    2. Right-click → Share → "Anyone with the link" → Copy link
+    3. Paste the full Google Drive link into the "image" field
+    The site will automatically convert it to a working image URL.
+
+  HOW TO SET UP RAZORPAY:
+    1. Sign up at razorpay.com and get your Key ID
+    2. Replace "rzp_live_XXXXXXXXXXXXXXXX" below with your real Key ID
+
+  HOW TO ADD YOUR QR CODE:
+    1. Upload your UPI QR image to Google Drive (share it)
+    2. Paste the link into "upiQR" below
   ============================================================ -->
 <script id="siteData" type="application/json">
 {
@@ -27,6 +36,8 @@
     "TrustReg": "Trust Reg. No. 76/IV/2025",
     "email": "founder@literatelives.org",
     "upiId": "MSLITERATELIVESFOUNDATIONTRUST.eazypay@icici",
+    "upiQR": "",
+    "razorpayKeyId": "rzp_live_XXXXXXXXXXXXXXXX",
     "instagram": "https://www.instagram.com/literate.lives/",
     "linkedin": "#",
     "twitter": "#"
@@ -50,10 +61,10 @@
   ],
 
   "pressLogos": [
-    "The",
-    "Deccan",
-    "Times",
-    "Hyderabad"
+    "The Hindu",
+    "Deccan Chronicle",
+    "Times of India",
+    "Hyderabad Mirror"
   ],
 
   "whatWeDo": [
@@ -82,6 +93,7 @@
   "about": {
     "founderName": "Preetham Kommareddy and Aripra Sharma",
     "founderTitle": "Founders · Literate Lives Foundation",
+    "founderPhoto": "",
     "founderQuote": "We started LLF because we believe reading is the most underrated superpower a child can have. In a world that profits from short attention spans, giving a child a book is a quiet act of rebellion.",
     "paragraphs": [
       "Literate Lives Foundation was founded in 2024 by a 9th-grade student who noticed a troubling gap — underprivileged children in Hyderabad's orphanages had no access to books at a time when the rest of the world was drowning in screens.",
@@ -121,7 +133,7 @@
       "status": "In Progress",
       "statusColor": "sepia",
       "name": "N/A",
-      "image": "images/your-photo.jpg",
+      "image": "",
       "description": "Coming Soon",
       "books": "",
       "children": "",
@@ -131,9 +143,23 @@
 
   "galleryCategories": ["All", "Libraries", "Events", "Team", "Children"],
 
+  "gallery": [
+    { "image": "", "label": "Library Launch",   "category": "Libraries", "wide": true,  "tall": true  },
+    { "image": "", "label": "Children Reading", "category": "Children",  "wide": false, "tall": false },
+    { "image": "", "label": "Bookshelf",        "category": "Libraries", "wide": false, "tall": false },
+    { "image": "", "label": "Volunteer Day",    "category": "Events",    "wide": false, "tall": false },
+    { "image": "", "label": "Team Photo",       "category": "Team",      "wide": false, "tall": true  },
+    { "image": "", "label": "Reading Session",  "category": "Children",  "wide": true,  "tall": false },
+    { "image": "", "label": "Book Drive",       "category": "Events",    "wide": false, "tall": false },
+    { "image": "", "label": "Installation Day", "category": "Libraries", "wide": false, "tall": false },
+    { "image": "", "label": "Story Time",       "category": "Children",  "wide": false, "tall": false },
+    { "image": "", "label": "Team at Work",     "category": "Team",      "wide": true,  "tall": false }
+  ],
+
   "blogPosts": [
     {
       "category": "Impact Story",
+      "image": "",
       "title": "What Happened When We Installed Our Second Library",
       "excerpt": "The response from the children at Sunshine Children's Home was something we weren't quite prepared for. Here's what we saw on installation day.",
       "date": "March 2025",
@@ -141,6 +167,7 @@
     },
     {
       "category": "Founder's Note",
+      "image": "",
       "title": "Why I Started LLF at 14 — And What I've Learned Since",
       "excerpt": "A reflection on building a registered Trust in 9th grade, the mistakes made, the lessons learned, and what comes next.",
       "date": "February 2025",
@@ -148,6 +175,7 @@
     },
     {
       "category": "Research",
+      "image": "",
       "title": "The Attention-Span Crisis Is Real — Here's the Data",
       "excerpt": "Short-form content is rewiring how children process information. We look at the research, and why books are part of the answer.",
       "date": "January 2025",
@@ -155,6 +183,7 @@
     },
     {
       "category": "Behind the Scenes",
+      "image": "",
       "title": "How We Curated Our Book List: 400+ Titles Explained",
       "excerpt": "Choosing books for underprivileged children aged 6–16 with a tight budget is harder than it sounds. Here's our process.",
       "date": "January 2025",
@@ -303,7 +332,6 @@ nav.on-dark .nav-cta{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0
 .hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;padding:68px 6% 0;position:relative;overflow:hidden;}
 .hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.4;pointer-events:none;}
 .hero-bg-line{position:absolute;right:0;top:0;bottom:0;width:45%;background:linear-gradient(135deg,rgba(181,115,106,0.06) 0%,transparent 60%);border-left:1px solid rgba(196,168,130,0.1);}
-.hero-float-text{position:absolute;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:rgba(255,255,255,0.025);line-height:1;user-select:none;pointer-events:none;}
 .hero-content{max-width:700px;position:relative;z-index:2;padding-bottom:130px;}
 .hero-tag{display:inline-flex;align-items:center;gap:10px;font-weight:300;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sepia-light);margin-bottom:32px;opacity:0;animation:fadeUp 1s 0.2s ease both;}
 .hero-tag::before{content:'';width:28px;height:1px;background:var(--sepia-light);}
@@ -365,7 +393,9 @@ nav.on-dark .nav-cta{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0
 .page-header p{font-weight:300;font-size:0.95rem;color:rgba(253,250,245,0.5);max-width:500px;line-height:1.9;}
 
 .about-body{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-.about-img-frame{background:var(--parchment-deep);aspect-ratio:4/5;border:1px solid rgba(139,111,71,0.15);display:flex;align-items:center;justify-content:center;color:var(--ink-muted);font-size:0.8rem;font-weight:300;letter-spacing:0.08em;position:sticky;top:90px;}
+.about-img-frame{background:var(--parchment-deep);aspect-ratio:4/5;border:1px solid rgba(139,111,71,0.15);overflow:hidden;position:sticky;top:90px;}
+.about-img-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.about-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--ink-muted);font-size:0.8rem;font-weight:300;letter-spacing:0.08em;}
 .about-text p{font-weight:300;font-size:0.95rem;color:var(--ink-muted);line-height:1.95;letter-spacing:0.02em;margin-bottom:24px;}
 .founder-pull{margin:40px 0;border-left:2px solid var(--rose-light);padding:28px 32px;background:rgba(181,115,106,0.05);}
 .founder-pull blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.3rem;color:var(--navy);line-height:1.6;margin-bottom:14px;}
@@ -375,10 +405,12 @@ nav.on-dark .nav-cta{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0
 .value-item h4{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.05rem;color:var(--ink);margin-bottom:7px;}
 .value-item p{font-weight:300;font-size:0.82rem;color:var(--ink-muted);line-height:1.7;}
 
+/* ── Library cards with images ── */
 .library-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px;}
 .library-card{border:1px solid rgba(139,111,71,0.12);background:var(--white);overflow:hidden;transition:transform 0.4s ease,box-shadow 0.4s ease;}
 .library-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(28,26,23,0.1);}
-.library-img{background:var(--parchment-deep);aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:300;letter-spacing:0.1em;color:var(--ink-muted);border-bottom:1px solid rgba(139,111,71,0.1);}
+.library-img{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid rgba(139,111,71,0.1);background:var(--parchment-deep);display:flex;align-items:center;justify-content:center;color:var(--ink-muted);font-size:0.75rem;font-weight:300;letter-spacing:0.1em;}
+.library-img img{width:100%;height:100%;object-fit:cover;display:block;}
 .library-body{padding:28px;}
 .library-tag{font-weight:400;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:12px;display:block;}
 .library-body h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.25rem;color:var(--ink);margin-bottom:10px;}
@@ -436,30 +468,36 @@ nav.on-dark .nav-cta{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0
 .involve-body ul li{font-weight:300;font-size:0.85rem;color:var(--ink-muted);padding:7px 0;border-bottom:1px solid rgba(139,111,71,0.08);display:flex;align-items:center;gap:10px;}
 .involve-body ul li::before{content:'—';color:var(--sepia-light);}
 
+/* ── Donate box ── */
 .donate-box{background:var(--parchment-deep);padding:60px;text-align:center;border:1px solid rgba(139,111,71,0.12);}
 .donate-box h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.6rem;color:var(--navy);margin-bottom:14px;}
-.donate-box p{font-weight:300;font-size:0.9rem;color:var(--ink-muted);margin-bottom:36px;line-height:1.85;}
+.donate-box>p{font-weight:300;font-size:0.9rem;color:var(--ink-muted);margin-bottom:36px;line-height:1.85;}
 .amt-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;}
 .amt-pill{font-family:'Lato',sans-serif;font-weight:300;font-size:0.85rem;border:1px solid rgba(139,111,71,0.25);background:var(--white);color:var(--ink-soft);padding:10px 22px;cursor:pointer;transition:all 0.25s;}
 .amt-pill:hover,.amt-pill.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
-.qr-box{width:130px;height:130px;margin:0 auto 14px;background:var(--white);border:1px solid rgba(139,111,71,0.2);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:300;color:var(--ink-muted);text-align:center;}
-.donate-note{font-weight:300;font-size:0.75rem;letter-spacing:0.08em;color:var(--ink-muted);margin-top:14px;}
+.donate-divider{display:flex;align-items:center;gap:18px;margin:28px auto;max-width:360px;color:var(--ink-muted);font-weight:300;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;}
+.donate-divider::before,.donate-divider::after{content:'';flex:1;height:1px;background:rgba(139,111,71,0.2);}
+.qr-section{display:inline-flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:10px;}
+.qr-img-wrap{width:140px;height:140px;background:var(--white);border:1px solid rgba(139,111,71,0.2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.qr-img-wrap img{width:100%;height:100%;object-fit:contain;}
+.qr-placeholder{font-size:0.72rem;font-weight:300;color:var(--ink-muted);text-align:center;padding:12px;}
+.donate-note{font-weight:300;font-size:0.75rem;letter-spacing:0.08em;color:var(--ink-muted);margin-top:18px;}
 
-.contact-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:70px;margin-top:60px;}
-.contact-aside h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.8rem;color:var(--ink);margin-bottom:18px;}
-.contact-aside p{font-weight:300;font-size:0.9rem;color:var(--ink-muted);line-height:1.9;margin-bottom:32px;}
-.contact-item{display:flex;gap:16px;margin-bottom:22px;align-items:flex-start;}
-.ci-icon{width:36px;height:36px;background:var(--parchment-deep);border:1px solid rgba(139,111,71,0.15);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.ci-text{font-weight:300;font-size:0.85rem;color:var(--ink-muted);line-height:1.7;}
-.ci-text strong{display:block;font-weight:400;color:var(--ink);margin-bottom:1px;}
-.contact-form-wrap{background:var(--white);padding:44px;border:1px solid rgba(139,111,71,0.1);}
-.contact-form-wrap h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.7rem;color:var(--ink);margin-bottom:28px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.form-group{margin-bottom:18px;}
-.form-group label{display:block;font-weight:300;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 14px;border:1px solid rgba(139,111,71,0.18);background:var(--parchment);font-family:'Lato',sans-serif;font-weight:300;font-size:0.88rem;color:var(--ink);outline:none;transition:border 0.25s,background 0.25s;}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--sepia);background:var(--white);}
-.form-group textarea{min-height:110px;resize:vertical;}
+/* ── Contact — email only ── */
+.contact-email-wrap{max-width:680px;margin:70px auto 0;text-align:center;}
+.contact-email-wrap h3{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2rem;color:var(--ink);margin-bottom:16px;}
+.contact-email-wrap>p{font-weight:300;font-size:0.95rem;color:var(--ink-muted);line-height:1.9;margin-bottom:50px;}
+.contact-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:50px;}
+.contact-card{background:var(--white);border:1px solid rgba(139,111,71,0.12);padding:30px 24px;text-align:left;transition:transform 0.3s,box-shadow 0.3s;}
+.contact-card:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(28,26,23,0.07);}
+.contact-card .cc-icon{font-size:1.4rem;margin-bottom:14px;display:block;}
+.contact-card h4{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.05rem;color:var(--ink);margin-bottom:7px;}
+.contact-card p{font-weight:300;font-size:0.83rem;color:var(--ink-muted);line-height:1.75;}
+.contact-card a{color:var(--rose);text-decoration:none;word-break:break-all;}
+.contact-card a:hover{text-decoration:underline;}
+.contact-email-cta{display:inline-flex;align-items:center;gap:12px;background:var(--navy);color:var(--white);padding:18px 36px;font-family:'Lato',sans-serif;font-weight:300;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:background 0.3s,transform 0.3s;cursor:pointer;}
+.contact-email-cta:hover{background:var(--navy-soft);transform:translateY(-2px);}
+.contact-email-cta svg{flex-shrink:0;}
 
 footer{background:var(--ink);padding:64px 6% 28px;}
 .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,0.06);}
@@ -490,12 +528,13 @@ footer{background:var(--ink);padding:64px 6% 28px;}
 
 @media(max-width:960px){
   .what-grid,.library-grid,.involve-grid{grid-template-columns:1fr 1fr;}
-  .impact-wrap,.about-body,.contact-layout{grid-template-columns:1fr;}
+  .impact-wrap,.about-body{grid-template-columns:1fr;}
   .about-img-frame{position:static;aspect-ratio:16/9;}
   .footer-grid{grid-template-columns:1fr 1fr;}
   .blog-layout{grid-template-columns:1fr;}
   .gallery-grid{grid-template-columns:repeat(2,1fr);}
   .impact-stats-grid{grid-template-columns:1fr 1fr;}
+  .contact-cards{grid-template-columns:1fr;}
 }
 @media(max-width:600px){
   .what-grid,.library-grid,.involve-grid,.values-grid,.impact-stats-grid{grid-template-columns:1fr;}
@@ -504,7 +543,6 @@ footer{background:var(--ink);padding:64px 6% 28px;}
   .hero-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,0.05);padding:16px;}
   .nav-links{display:none;}
   .gallery-grid{grid-template-columns:1fr 1fr;}
-  .form-row{grid-template-columns:1fr;}
   .blog-post{flex-direction:column;}
   .blog-post-img{width:100%;height:150px;}
   .donate-box{padding:36px 20px;}
@@ -524,7 +562,6 @@ footer{background:var(--ink);padding:64px 6% 28px;}
   <ul class="nav-links" id="navLinks"></ul>
 </nav>
 
-<!-- Pages rendered by JS -->
 <div class="page active" id="page-home"></div>
 <div class="page" id="page-about"></div>
 <div class="page" id="page-work"></div>
@@ -535,19 +572,32 @@ footer{background:var(--ink);padding:64px 6% 28px;}
 <div class="page" id="page-contact"></div>
 
 <script>
-// ── Load data ──────────────────────────────────────────────────
 const D = JSON.parse(document.getElementById('siteData').textContent);
-
-// ── Helpers ───────────────────────────────────────────────────
 const $ = id => document.getElementById(id);
-const el = (tag, cls, html='') => {
-  const e = document.createElement(tag);
-  if(cls) e.className = cls;
-  if(html) e.innerHTML = html;
-  return e;
-};
 
-// ── Footer (shared) ───────────────────────────────────────────
+// ── Google Drive image URL converter ──────────────────────────
+// Accepts any Google Drive share link and converts it to a direct embeddable URL.
+// If the link isn't a Drive link (e.g. already a direct URL or a local path), it passes through unchanged.
+function driveImg(url) {
+  if (!url || url.trim() === '') return '';
+  // Match /file/d/FILE_ID/view pattern
+  const m = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (m) return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w800`;
+  // Match id= parameter pattern
+  const m2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (m2) return `https://drive.google.com/thumbnail?id=${m2[1]}&sz=w800`;
+  // Not a Drive link — return as-is
+  return url;
+}
+
+// Renders an <img> from a URL (Drive or direct), or a placeholder div if empty
+function imgEl(url, alt, placeholderText) {
+  const src = driveImg(url);
+  if (src) return `<img src="${src}" alt="${alt}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'about-img-placeholder\\'>${placeholderText}</div>'">`;
+  return `<div class="about-img-placeholder">${placeholderText}</div>`;
+}
+
+// ── Footer ────────────────────────────────────────────────────
 function makeFooter(){
   return `<footer>
     <div class="footer-grid">
@@ -585,13 +635,8 @@ function makeFooter(){
   </footer>`;
 }
 
-// ── Page header ───────────────────────────────────────────────
 function makePageHeader(eyebrow, h1, sub){
-  return `<div class="page-header">
-    <div class="eyebrow">${eyebrow}</div>
-    <h1>${h1}</h1>
-    <p>${sub}</p>
-  </div>`;
+  return `<div class="page-header"><div class="eyebrow">${eyebrow}</div><h1>${h1}</h1><p>${sub}</p></div>`;
 }
 
 // ── NAV ───────────────────────────────────────────────────────
@@ -599,7 +644,6 @@ $('nav-site-name').textContent = D.site.name;
 const navItems = [
   {id:'home',label:'Home'},{id:'about',label:'About'},
   {id:'work',label:'Our Work'},{id:'gallery',label:'Gallery'},
-  {id:'blog',label:'Blog'},{id:'events',label:'Events'},
   {id:'contact',label:'Contact'},{id:'involve',label:'Donate',cta:true}
 ];
 $('navLinks').innerHTML = navItems.map(n =>
@@ -689,7 +733,9 @@ $('page-about').innerHTML = `
   ${makePageHeader('Our Story', `About Literate Lives<br><em style="font-style:italic;color:var(--sepia-light);">Foundation</em>`, 'A student-founded Trust on a mission to rebuild the lost art of reading among India\'s most vulnerable children.')}
   <section class="section">
     <div class="about-body">
-      <div class="about-img-frame reveal-left">[Founder / Team Photo]</div>
+      <div class="about-img-frame reveal-left">
+        ${imgEl(D.about.founderPhoto, 'Founders', '[Founder / Team Photo]')}
+      </div>
       <div class="about-text reveal-right">
         <div class="eyebrow">The Beginning</div>
         <h2 class="section-heading">Born From a <em>Simple Belief</em></h2>
@@ -719,7 +765,9 @@ $('page-work').innerHTML = `
     <div class="library-grid">
       ${D.libraries.map((lib,i)=>`
         <div class="library-card reveal reveal-delay-${i+1}">
-          <div class="library-img">[Library Photo]</div>
+          <div class="library-img">
+            ${imgEl(lib.image, lib.name, '[Library Photo]')}
+          </div>
           <div class="library-body">
             <span class="library-tag" style="color:var(--${lib.statusColor})">${lib.status}</span>
             <h3>${lib.name}</h3>
@@ -748,15 +796,18 @@ $('page-work').innerHTML = `
   ${makeFooter()}`;
 
 // ── GALLERY ───────────────────────────────────────────────────
-const galleryPlaceholders = [
-  {cls:'g-wide g-tall',label:'Feature · Library Launch'},
-  {cls:'',label:'Photo'},{cls:'',label:'Photo'},
-  {cls:'',label:'Photo'},{cls:'g-tall',label:'Photo'},
-  {cls:'g-wide',label:'Children Reading'},
-  {cls:'',label:'Photo'},{cls:'',label:'Photo'},
-  {cls:'',label:'Photo'},{cls:'',label:'Photo'},
-  {cls:'g-wide',label:'Team at Installation'}
-];
+function buildGallery(filter) {
+  const items = filter === 'All' ? D.gallery : D.gallery.filter(g => g.category === filter);
+  return items.map(g => {
+    const src = driveImg(g.image);
+    const cls = [(g.wide ? 'g-wide' : ''), (g.tall ? 'g-tall' : '')].join(' ').trim();
+    const inner = src
+      ? `<img src="${src}" alt="${g.label}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:0.72rem;color:var(--ink-muted);">[${g.label}]</span>`
+      : `<span>[${g.label}]</span>`;
+    return `<div class="gallery-item ${cls}" data-cat="${g.category}">${inner}</div>`;
+  }).join('');
+}
+
 $('page-gallery').innerHTML = `
   ${makePageHeader('Visual Stories', `Photo <em style="font-style:italic;color:var(--sepia-light);">Gallery</em>`, 'Moments from our installations, events, and the children whose lives we\'re touching.')}
   <section class="section">
@@ -766,10 +817,10 @@ $('page-gallery').innerHTML = `
       <div class="rule"></div>
     </div>
     <div class="gallery-filters reveal">
-      ${D.galleryCategories.map((c,i)=>`<button class="gf-btn${i===0?' active':''}" onclick="filterGallery(this)">${c}</button>`).join('')}
+      ${D.galleryCategories.map((c,i)=>`<button class="gf-btn${i===0?' active':''}" onclick="filterGallery(this,'${c}')">${c}</button>`).join('')}
     </div>
-    <div class="gallery-grid reveal">
-      ${galleryPlaceholders.map(p=>`<div class="gallery-item ${p.cls}">[${p.label}]</div>`).join('')}
+    <div class="gallery-grid reveal" id="galleryGrid">
+      ${buildGallery('All')}
     </div>
   </section>
   ${makeFooter()}`;
@@ -782,7 +833,11 @@ $('page-blog').innerHTML = `
       <div>
         ${D.blogPosts.map((p,i)=>`
           <div class="blog-post reveal reveal-delay-${i}">
-            <div class="blog-post-img">[Post Image]</div>
+            <div class="blog-post-img" style="overflow:hidden;flex-shrink:0;width:170px;">
+              ${driveImg(p.image)
+                ? `<img src="${driveImg(p.image)}" alt="${p.title}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='[Post Image]'">`
+                : '[Post Image]'}
+            </div>
             <div class="blog-post-body">
               <span class="blog-cat">${p.category}</span>
               <h3>${p.title}</h3>
@@ -834,83 +889,130 @@ function renderEvent(ev, past=false){
 $('page-events').innerHTML = `
   ${makePageHeader('What\'s Happening', `Events &amp; <em style="font-style:italic;color:var(--sepia-light);">Gatherings</em>`, 'Library launches, fundraisers, and community reading days — join us in person.')}
   <section class="section">
-    <div class="reveal">
-      <div class="eyebrow">Upcoming</div>
-      <h2 class="section-heading">On the <em>Calendar</em></h2>
-      <div class="rule"></div>
-    </div>
+    <div class="reveal"><div class="eyebrow">Upcoming</div><h2 class="section-heading">On the <em>Calendar</em></h2><div class="rule"></div></div>
     <div class="events-list">${D.events.upcoming.map(e=>renderEvent(e)).join('')}</div>
     <div style="margin-top:70px;">
-      <div class="reveal">
-        <div class="eyebrow">Past Events</div>
-        <h2 class="section-heading">Where We've <em>Been</em></h2>
-        <div class="rule"></div>
-      </div>
+      <div class="reveal"><div class="eyebrow">Past Events</div><h2 class="section-heading">Where We've <em>Been</em></h2><div class="rule"></div></div>
       <div class="events-list">${D.events.past.map(e=>renderEvent(e,true)).join('')}</div>
     </div>
   </section>
   ${makeFooter()}`;
 
-// ── GET INVOLVED ──────────────────────────────────────────────
+// ── GET INVOLVED — with Razorpay + QR ─────────────────────────
+// Tracks the currently selected donation amount
+let selectedAmount = 1000;
+
+function pickAmt(el) {
+  document.querySelectorAll('.amt-pill').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  const raw = el.textContent.replace(/[₹,]/g,'').trim();
+  selectedAmount = isNaN(parseInt(raw)) ? null : parseInt(raw) * 100; // Razorpay uses paise
+}
+
+function launchRazorpay() {
+  if (!selectedAmount) {
+    alert('Please select a donation amount.');
+    return;
+  }
+  const options = {
+    key: D.site.razorpayKeyId,
+    amount: selectedAmount,            // in paise (₹1 = 100 paise)
+    currency: 'INR',
+    name: D.site.name,
+    description: 'Library donation — ' + D.site.TrustReg,
+    image: '',                         // optional: logo URL
+    handler: function(response) {
+      alert('Thank you for your donation! Payment ID: ' + response.razorpay_payment_id);
+    },
+    prefill: { name: '', email: '', contact: '' },
+    notes: { trust_reg: D.site.TrustReg },
+    theme: { color: '#22304a' }
+  };
+  const rzp = new Razorpay(options);
+  rzp.on('payment.failed', function(resp){
+    alert('Payment failed. Please try again or use UPI directly.');
+  });
+  rzp.open();
+}
+
+const qrSrc = driveImg(D.site.upiQR);
+
 $('page-involve').innerHTML = `
   ${makePageHeader('Make a Difference', `Get <em style="font-style:italic;color:var(--sepia-light);">Involved</em>`, 'There are many ways to support Literate Lives — pick what works for you.')}
   <section class="section">
-    <div class="involve-grid reveal">
-      ${D.involve.tracks.map(t=>`
+    <div class="involve-grid reveal" id="involve-grid-wrap">
+      ${D.involve.tracks.map(t => {
+        if (t.action === 'donate') {
+          return `
+          <div class="involve-card" id="donate-anchor">
+            <div class="involve-head"><h3>${t.title}</h3><p>${t.description}</p></div>
+            <div class="involve-body">
+              <ul>${t.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+              <div class="amt-pills" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:16px;">
+                ${D.involve.donateAmounts.map((a,i)=>`<div class="amt-pill${i===1?' active':''}" onclick="pickAmt(this)" style="font-size:0.78rem;padding:8px 14px;">${a}</div>`).join('')}
+              </div>
+              <button class="btn-rose" style="width:100%;margin-bottom:10px;" onclick="launchRazorpay()">Pay via Razorpay →</button>
+              <p style="font-size:0.7rem;font-weight:300;color:var(--ink-muted);text-align:center;margin-bottom:14px;">Card · UPI · Net Banking · Wallets</p>
+              <div style="border-top:1px solid rgba(139,111,71,0.12);padding-top:14px;text-align:center;">
+                <div class="qr-img-wrap" style="width:110px;height:110px;margin:0 auto 8px;">
+                  ${qrSrc
+                    ? `<img src="${qrSrc}" alt="UPI QR" onerror="this.parentElement.innerHTML='<div class=\\'qr-placeholder\\'>QR unavailable</div>'">`
+                    : `<div class="qr-placeholder" style="font-size:0.65rem;">Add QR via<br>"upiQR" in JSON</div>`}
+                </div>
+                <p style="font-size:0.72rem;font-weight:300;color:var(--ink-muted);">UPI: <strong style="font-size:0.68rem;word-break:break-all;">${D.site.upiId}</strong></p>
+              </div>
+              <p style="font-size:0.68rem;font-weight:300;color:var(--ink-muted);text-align:center;margin-top:12px;letter-spacing:0.04em;">${D.site.TrustReg} · 80G available</p>
+            </div>
+          </div>`;
+        }
+        return `
         <div class="involve-card">
           <div class="involve-head"><h3>${t.title}</h3><p>${t.description}</p></div>
           <div class="involve-body">
             <ul>${t.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-            <button class="btn-sepia" style="width:100%;" onclick="${t.action==='donate'?`document.getElementById('donate-anchor').scrollIntoView({behavior:'smooth'})`:`showPage('contact')`}">${t.cta}</button>
+            <button class="btn-sepia" style="width:100%;" onclick="showPage('contact')">${t.cta}</button>
           </div>
-        </div>`).join('')}
-    </div>
-    <div class="donate-box reveal" id="donate-anchor">
-      <div class="eyebrow" style="justify-content:center;">Donate Now</div>
-      <h2>Every Rupee Builds a <em style="font-style:italic;">Reader</em></h2>
-      <div class="rule" style="margin:20px auto 28px;"></div>
-      <p>Choose an amount below, or enter your own. Via UPI, bank transfer, or Razorpay.</p>
-      <div class="amt-pills">
-        ${D.involve.donateAmounts.map((a,i)=>`<div class="amt-pill${i===1?' active':''}" onclick="pickAmt(this)">${a}</div>`).join('')}
-      </div>
-      <div class="qr-box">UPI QR Code<br>[Placeholder]</div>
-      <p style="font-size:0.83rem;font-weight:300;color:var(--ink-muted);">UPI ID: <strong>${D.site.upiId}</strong></p>
-      <button class="btn-rose" style="margin-top:16px;">Pay via Razorpay</button>
-      <p class="donate-note">${D.site.TrustReg} · 80G tax exemption available · All donations acknowledged</p>
+        </div>`;
+      }).join('')}
     </div>
   </section>
   ${makeFooter()}`;
 
-// ── CONTACT ───────────────────────────────────────────────────
+// ── CONTACT — email only ──────────────────────────────────────
 $('page-contact').innerHTML = `
   ${makePageHeader('Reach Out', `Contact <em style="font-style:italic;color:var(--sepia-light);">Us</em>`, 'For donations, volunteering, media enquiries, or partnerships — we\'d love to hear from you.')}
   <section class="section">
-    <div class="contact-layout">
-      <div class="contact-aside reveal-left">
-        <h3>Get in Touch</h3>
-        <p>Whether you want to donate books, volunteer, or explore a partnership — reach out and we'll respond within 48 hours.</p>
-        <div class="contact-item"><div class="ci-icon">📧</div><div class="ci-text"><strong>Email</strong>${D.site.email}</div></div>
-        <div class="contact-item"><div class="ci-icon">📍</div><div class="ci-text"><strong>Based in</strong>${D.site.location}</div></div>
-        <div class="contact-item"><div class="ci-icon">📱</div><div class="ci-text"><strong>Social</strong>@literate.lives (Instagram &amp; LinkedIn)</div></div>
-        <div class="contact-item"><div class="ci-icon">📜</div><div class="ci-text"><strong>Registration</strong>${D.site.TrustReg} · 80G Certified</div></div>
-      </div>
-      <div class="contact-form-wrap reveal-right">
-        <h3>Send Us a Message</h3>
-        <div class="form-row">
-          <div class="form-group"><label>First Name</label><input type="text" placeholder="First name"></div>
-          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Last name"></div>
+    <div class="contact-email-wrap reveal">
+      <h3>We'd Love to Hear From You</h3>
+      <p>Whether you want to donate books, volunteer your time, explore a CSR partnership, or just learn more about what we do — drop us an email and we'll get back to you within 48 hours.</p>
+
+      <div class="contact-cards">
+        <div class="contact-card">
+          <span class="cc-icon">📧</span>
+          <h4>Email Us</h4>
+          <p><a href="mailto:${D.site.email}">${D.site.email}</a></p>
         </div>
-        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
-        <div class="form-group"><label>I'm interested in…</label>
-          <select>
-            <option>Donating</option><option>Volunteering</option>
-            <option>Corporate / CSR Partnership</option>
-            <option>Media / Press Enquiry</option><option>General Question</option>
-          </select>
+        <div class="contact-card">
+          <span class="cc-icon">📍</span>
+          <h4>Based In</h4>
+          <p>${D.site.location}</p>
         </div>
-        <div class="form-group"><label>Message</label><textarea placeholder="Tell us more…"></textarea></div>
-        <button class="btn-sepia" style="width:100%;">Send Message</button>
+        <div class="contact-card">
+          <span class="cc-icon">📸</span>
+          <h4>Instagram</h4>
+          <p><a href="${D.site.instagram}" target="_blank">@literate.lives</a></p>
+        </div>
+        <div class="contact-card">
+          <span class="cc-icon">📜</span>
+          <h4>Registration</h4>
+          <p>${D.site.TrustReg}<br>80G Certified</p>
+        </div>
       </div>
+
+      <a class="contact-email-cta" href="mailto:${D.site.email}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        Send us an email
+      </a>
     </div>
   </section>
   ${makeFooter()}`;
@@ -936,8 +1038,6 @@ function observePage(pageEl){
     revealObs.observe(el);
   });
 }
-
-// Observe all pages
 document.querySelectorAll('.page').forEach(observePage);
 
 // ── NAV ───────────────────────────────────────────────────────
@@ -971,16 +1071,18 @@ function showPage(id){
   updateNav();
 }
 
-function pickAmt(el){document.querySelectorAll('.amt-pill').forEach(a=>a.classList.remove('active'));el.classList.add('active');}
-function filterGallery(el){document.querySelectorAll('.gf-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+function filterGallery(el, category){
+  document.querySelectorAll('.gf-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const grid = document.getElementById('galleryGrid');
+  if(grid) grid.innerHTML = buildGallery(category);
+}
 
-// Trigger initial reveals on home page
 setTimeout(()=>{
   document.querySelectorAll('#page-home .reveal, #page-home .reveal-left, #page-home .reveal-right').forEach(el=>{
     if(el.getBoundingClientRect().top<window.innerHeight*0.9) el.classList.add('visible');
   });
 },100);
-
 updateNav();
 </script>
 </body>
