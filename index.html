@@ -93,7 +93,8 @@
   "about": {
     "founderName": "Preetham Kommareddy and Aripra Sharma",
     "founderTitle": "Founders · Literate Lives Foundation",
-    "founderPhoto": "",
+    "founderPhoto1": "https://drive.google.com/file/d/1GiZLMmDpjGgecNbWBwCh1iohASilB8q2/view?usp=drive_link",
+    "founderPhoto2": "https://drive.google.com/file/d/1s5qOOvy8K0QcVmy3OT4MlmkzeEd8nsK0/view?usp=drive_link",
     "founderQuote": "We started LLF because we believe reading is the most underrated superpower a child can have. In a world that profits from short attention spans, giving a child a book is a quiet act of rebellion.",
     "paragraphs": [
       "Literate Lives Foundation was founded in 2024 by a 9th-grade student who noticed a troubling gap — underprivileged children in Hyderabad's orphanages had no access to books at a time when the rest of the world was drowning in screens.",
@@ -392,8 +393,9 @@ nav.on-dark .nav-cta{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0
 .page-header h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.5rem,5vw,4.5rem);color:var(--white);line-height:1.08;letter-spacing:-0.01em;margin-bottom:18px;}
 .page-header p{font-weight:300;font-size:0.95rem;color:rgba(253,250,245,0.5);max-width:500px;line-height:1.9;}
 
-.about-body{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-.about-img-frame{background:var(--parchment-deep);aspect-ratio:4/5;border:1px solid rgba(139,111,71,0.15);overflow:hidden;position:sticky;top:90px;}
+.about-body{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;}
+.about-img-stack{display:flex;flex-direction:column;gap:20px;position:sticky;top:90px;}
+.about-img-frame{background:var(--parchment-deep);aspect-ratio:1/1;border:1px solid rgba(139,111,71,0.15);overflow:hidden;}
 .about-img-frame img{width:100%;height:100%;object-fit:cover;display:block;}
 .about-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--ink-muted);font-size:0.8rem;font-weight:300;letter-spacing:0.08em;}
 .about-text p{font-weight:300;font-size:0.95rem;color:var(--ink-muted);line-height:1.95;letter-spacing:0.02em;margin-bottom:24px;}
@@ -533,7 +535,8 @@ footer{background:var(--ink);padding:64px 6% 28px;}
 @media(max-width:960px){
   .what-grid,.library-grid,.involve-grid{grid-template-columns:1fr 1fr;}
   .impact-wrap,.about-body{grid-template-columns:1fr;}
-  .about-img-frame{position:static;aspect-ratio:16/9;}
+  .about-img-stack{position:static;}
+  .about-img-frame{aspect-ratio:16/9;}
   .footer-grid{grid-template-columns:1fr 1fr;}
   .blog-layout{grid-template-columns:1fr;}
   .gallery-grid{grid-template-columns:repeat(2,1fr);}
@@ -737,8 +740,13 @@ $('page-about').innerHTML = `
   ${makePageHeader('Our Story', `About Literate Lives<br><em style="font-style:italic;color:var(--sepia-light);">Foundation</em>`, 'A student-founded Trust on a mission to rebuild the lost art of reading among India\'s most vulnerable children.')}
   <section class="section">
     <div class="about-body">
-      <div class="about-img-frame reveal-left">
-        ${imgEl(D.about.founderPhoto, 'Founders', '[Founder / Team Photo]')}
+      <div class="about-img-stack reveal-left">
+        <div class="about-img-frame">
+          ${imgEl(D.about.founderPhoto1, 'Founder 1', '[Founder Photo]')}
+        </div>
+        <div class="about-img-frame">
+          ${imgEl(D.about.founderPhoto2, 'Founder 2', '[Founder Photo]')}
+        </div>
       </div>
       <div class="about-text reveal-right">
         <div class="eyebrow">The Beginning</div>
