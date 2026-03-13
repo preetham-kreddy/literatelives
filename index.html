@@ -995,6 +995,7 @@ $('page-contact').innerHTML = `
           <span class="cc-icon">📧</span>
           <h4>Email Us</h4>
           <p><a href="mailto:${D.site.email}">${D.site.email}</a></p>
+          <button onclick="navigator.clipboard.writeText('${D.site.email}').then(()=>alert('Email copied!'))" style="margin-top:8px;font-size:0.7rem;font-weight:300;letter-spacing:0.1em;text-transform:uppercase;border:1px solid rgba(139,111,71,0.2);background:transparent;color:var(--ink-muted);padding:5px 12px;cursor:pointer;">Copy</button>
         </div>
         <div class="contact-card">
           <span class="cc-icon">📍</span>
@@ -1009,7 +1010,7 @@ $('page-contact').innerHTML = `
         <div class="contact-card">
           <span class="cc-icon">📜</span>
           <h4>Registration</h4>
-          <p>${D.site.TrustReg}<br></p>
+          <p>${D.site.TrustReg}<br> </p>
         </div>
       </div>
 
