@@ -915,12 +915,10 @@ function pickAmt(el) {
 }
 
 function launchRazorpay() {
-  if (!selectedAmount) {
-    alert('Please select a donation amount.');
-    return;
-  }
+  window.open('//rzp.io/rzp/XKQ4EqMN', '_blank');
+}
   const options = {
-    key: D.site.razorpayKeyId,
+    key: D.site.razorpayKeyId,https:
     amount: selectedAmount,            // in paise (₹1 = 100 paise)
     currency: 'INR',
     name: D.site.name,
