@@ -6,8 +6,7 @@
 <title>Literate Lives Foundation</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-<!-- Razorpay SDK -->
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 
 <!-- ============================================================
   ✏️  EDIT YOUR SITE CONTENT HERE — NO CODE KNOWLEDGE NEEDED
@@ -17,14 +16,6 @@
     2. Right-click → Share → "Anyone with the link" → Copy link
     3. Paste the full Google Drive link into the "image" field
     The site will automatically convert it to a working image URL.
-
-  HOW TO SET UP RAZORPAY:
-    1. Sign up at razorpay.com and get your Key ID
-    2. Replace "rzp_live_XXXXXXXXXXXXXXXX" below with your real Key ID
-
-  HOW TO ADD YOUR QR CODE:
-    1. Upload your UPI QR image to Google Drive (share it)
-    2. Paste the link into "upiQR" below
   ============================================================ -->
 <script id="siteData" type="application/json">
 {
@@ -36,9 +27,7 @@
     "founded": "Est. 2024",
     "TrustReg": "Trust Reg. No. 76/IV/2025",
     "email": "founder@literatelives.org",
-    "upiId": "MSLITERATELIVESFOUNDATIONTRUST.eazypay@icici",
-    "upiQR": "https://drive.google.com/file/d/1IKhKZWuywKxEljjpOYFmcFGK0KOqqvsy/view?usp=sharing",
-    "razorpayKeyId": "rzp_test_SQmwGgysB6OoHf",
+    "milaapUrl": "http://m-lp.co/buildlib-1?utm_medium=campaign_page_share&utm_source=copy",
     "instagram": "https://www.instagram.com/literate.lives/",
     "linkedin": "#",
     "twitter": "#"
@@ -469,9 +458,8 @@ nav.on-dark .nav-cta{border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0
 .involve-body ul li{font-weight:300;font-size:0.85rem;color:var(--ink-muted);padding:7px 0;border-bottom:1px solid rgba(139,111,71,0.08);display:flex;align-items:center;gap:10px;}
 .involve-body ul li::before{content:'—';color:var(--sepia-light);}
 /* ── Payment panel ── */
-.payment-panel{background:var(--white);border:1px solid rgba(139,111,71,0.12);border-bottom:none;padding:36px 40px;display:grid;grid-template-columns:1fr auto auto;gap:40px;align-items:center;}
-.payment-panel-pay{text-align:center;min-width:180px;}
-.payment-panel-qr{text-align:center;border-left:1px solid rgba(139,111,71,0.15);padding-left:40px;min-width:160px;}
+.payment-panel{background:var(--white);border:1px solid rgba(139,111,71,0.12);border-bottom:none;padding:36px 40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.payment-panel-pay{text-align:center;min-width:200px;}
 
 /* ── Donate box ── */
 .donate-box{background:var(--parchment-deep);padding:60px;text-align:center;border:1px solid rgba(139,111,71,0.12);}
@@ -903,44 +891,10 @@ $('page-events').innerHTML = `
   </section>
   ${makeFooter()}`;
 
-// ── GET INVOLVED — with Razorpay + QR ─────────────────────────
-// Tracks the currently selected donation amount
-let selectedAmount = 1000;
-
-function pickAmt(el) {
-  document.querySelectorAll('.amt-pill').forEach(a => a.classList.remove('active'));
-  el.classList.add('active');
-  const raw = el.textContent.replace(/[₹,]/g,'').trim();
-  selectedAmount = isNaN(parseInt(raw)) ? null : parseInt(raw) * 100; // Razorpay uses paise
+// ── GET INVOLVED ──────────────────────────────────────────────
+function launchDonate() {
+  window.open(D.site.milaapUrl, '_blank');
 }
-
-function launchRazorpay() {
-  if (!selectedAmount) {
-    alert('Please select a donation amount.');
-    return;
-  }
-  const options = {
-    key: D.site.razorpayKeyId,
-    amount: selectedAmount,            // in paise (₹1 = 100 paise)
-    currency: 'INR',
-    name: D.site.name,
-    description: 'Library donation — ' + D.site.TrustReg,
-    image: '',                         // optional: logo URL
-    handler: function(response) {
-      alert('Thank you for your donation! Payment ID: ' + response.razorpay_payment_id);
-    },
-    prefill: { name: '', email: '', contact: '' },
-    notes: { trust_reg: D.site.TrustReg },
-    theme: { color: '#22304a' }
-  };
-  const rzp = new Razorpay(options);
-  rzp.on('payment.failed', function(resp){
-    alert('Payment failed. Please try again or use UPI directly.');
-  });
-  rzp.open();
-}
-
-const qrSrc = driveImg(D.site.upiQR);
 
 $('page-involve').innerHTML = `
   ${makePageHeader('Make a Difference', `Get <em style="font-style:italic;color:var(--sepia-light);">Involved</em>`, 'There are many ways to support Literate Lives — pick what works for you.')}
@@ -949,21 +903,11 @@ $('page-involve').innerHTML = `
     <div class="payment-panel reveal">
       <div>
         <div class="eyebrow">Donate Now</div>
-        <div class="amt-pills" style="justify-content:flex-start;margin-bottom:0;">
-          ${D.involve.donateAmounts.map((a,i)=>`<div class="amt-pill${i===1?' active':''}" onclick="pickAmt(this)">${a}</div>`).join('')}
-        </div>
+        <p style="font-weight:300;font-size:0.9rem;color:var(--ink-muted);line-height:1.8;max-width:480px;">Your money goes directly to books, shelves, and installation costs. Donate securely via Milaap — card, UPI, net banking, and wallets accepted.</p>
       </div>
       <div class="payment-panel-pay">
-        <button class="btn-rose" style="width:100%;margin-bottom:8px;" onclick="launchRazorpay()">Pay via Razorpay →</button>
+        <button class="btn-rose" style="width:100%;margin-bottom:8px;" onclick="launchDonate()">Donate on Milaap →</button>
         <p style="font-size:0.7rem;font-weight:300;color:var(--ink-muted);">Card · UPI · Net Banking · Wallets</p>
-      </div>
-      <div class="payment-panel-qr">
-        <div class="qr-img-wrap" style="width:100px;height:100px;margin:0 auto 8px;">
-          ${qrSrc
-            ? `<img src="${qrSrc}" alt="UPI QR" onerror="this.parentElement.innerHTML='<div class=\\'qr-placeholder\\'>QR unavailable</div>'">`
-            : `<div class="qr-placeholder" style="font-size:0.62rem;">Add QR via<br>"upiQR" in JSON</div>`}
-        </div>
-        <p style="font-size:0.68rem;font-weight:300;color:var(--ink-muted);">UPI: <strong style="word-break:break-all;font-size:0.62rem;">${D.site.upiId}</strong></p>
       </div>
     </div>
 
@@ -973,11 +917,11 @@ $('page-involve').innerHTML = `
           <div class="involve-head"><h3>${t.title}</h3><p>${t.description}</p></div>
           <div class="involve-body">
             <ul>${t.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-            <button class="btn-sepia" style="width:100%;" onclick="${t.action==='donate'?`window.scrollTo({top:0,behavior:'smooth'})`:`showPage('contact')`}">${t.cta}</button>
+            <button class="btn-sepia" style="width:100%;" onclick="${t.action==='donate'?`launchDonate()`:`showPage('contact')`}">${t.cta}</button>
           </div>
         </div>`).join('')}
     </div>
-    <p style="font-size:0.75rem;font-weight:300;color:var(--ink-muted);text-align:center;margin-top:-40px;">${D.site.TrustReg}All donations acknowledged</p>
+    <p style="font-size:0.75rem;font-weight:300;color:var(--ink-muted);text-align:center;margin-top:-40px;">${D.site.TrustReg} · All donations acknowledged</p>
 
   </section>
   ${makeFooter()}`;
